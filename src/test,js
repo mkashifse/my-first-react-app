@@ -1,0 +1,85 @@
+import { useState } from "react";
+import "./App.css";
+import { onChangeHandler } from "./handlers";
+// Component props = {list, tableName}
+const TableView = (props) => {
+  return (
+    <div>
+      <h1 className="bold">{props.tableName}</h1>
+      <table>
+        <thead>
+          <th>SR </th>
+          <th>Model</th>
+          <th>Price</th>
+          <th>Name </th>
+        </thead>
+        <tbody>
+          {props.list.map((item, i) => {
+            return (
+              <tr key={i}>
+                <td>{item.sr}</td> <td>{item.model}</td> <td>{item.price}</td>{" "}
+                <td>{item.name}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+const ImageGallery = (props) => {
+  return (
+    <div className="grid grid-cols-3">
+      {props.urls.map((item, i) => {
+        return (
+          <div key={i} className="shadow rounded p-2 overflow-hidden h-32">
+            <img src={item} className="w-full h-full object-cover" />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+function App() {
+  const [test, setTest] = useState("THIS IS APP COMPONENT/FUNTION VARIABLE");
+  const [urlList, setUrlList] = useState([
+    "https://images.pexels.com/photos/12638731/pexels-photo-12638731.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+    "https://images.pexels.com/photos/5720781/pexels-photo-5720781.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+    "https://images.pexels.com/photos/9398521/pexels-photo-9398521.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+    "https://images.pexels.com/photos/12638731/pexels-photo-12638731.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+    "https://images.pexels.com/photos/5720781/pexels-photo-5720781.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+    "https://images.pexels.com/photos/9398521/pexels-photo-9398521.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+    "https://images.pexels.com/photos/12638731/pexels-photo-12638731.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+    "https://images.pexels.com/photos/5720781/pexels-photo-5720781.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+    "https://images.pexels.com/photos/9398521/pexels-photo-9398521.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+    "https://images.pexels.com/photos/12638731/pexels-photo-12638731.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+    "https://images.pexels.com/photos/5720781/pexels-photo-5720781.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+    "https://images.pexels.com/photos/9398521/pexels-photo-9398521.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
+  ]);
+  const [dataList, setDataList] = useState([
+    { sr: 1, name: "Oppo", model: "model 344", price: "90k" },
+    { sr: 2, name: "Vevo", model: "model 12cd4", price: "85k" },
+    { sr: 3, name: "Apple", model: "model 123344", price: "55k" },
+    { sr: 4, name: "Samsung", model: "model 1224", price: "450k" },
+    { sr: 5, name: "MI", model: "model 1fsd4", price: "4k" },
+  ]);
+
+  //  handler
+  const onChangeHandler = (e) => {
+    console.log(e.target.value);
+  };
+
+  let html = (
+    <div>
+      <input type="text" onChange={(event) => onChangeHandler(event)}></input>
+      <TableView list={dataList} tableName="BIG TABLE NAME"></TableView>
+      <ImageGallery urls={urlList}></ImageGallery>
+    </div>
+  );
+
+  return html;
+}
+
+export default App;
